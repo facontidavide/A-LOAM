@@ -41,7 +41,6 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
-#include <pcl/kdtree/kdtree_flann.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <ros/ros.h>
 #include <sensor_msgs/Imu.h>
@@ -54,6 +53,7 @@
 
 #include "aloam_velodyne/common.h"
 #include "aloam_velodyne/tic_toc.h"
+#include "aloam_velodyne/nanoflann_pcl.h"
 #include "lidarFactor.hpp"
 
 #define DISTORTION 0
@@ -74,8 +74,8 @@ double timeSurfPointsFlat = 0;
 double timeSurfPointsLessFlat = 0;
 double timeLaserCloudFullRes = 0;
 
-pcl::KdTreeFLANN<pcl::PointXYZI>::Ptr kdtreeCornerLast(new pcl::KdTreeFLANN<pcl::PointXYZI>());
-pcl::KdTreeFLANN<pcl::PointXYZI>::Ptr kdtreeSurfLast(new pcl::KdTreeFLANN<pcl::PointXYZI>());
+nanoflann::KdTreeFLANN<pcl::PointXYZI>::Ptr kdtreeCornerLast(new nanoflann::KdTreeFLANN<pcl::PointXYZI>());
+nanoflann::KdTreeFLANN<pcl::PointXYZI>::Ptr kdtreeSurfLast(new nanoflann::KdTreeFLANN<pcl::PointXYZI>());
 
 pcl::PointCloud<PointType>::Ptr cornerPointsSharp(new pcl::PointCloud<PointType>());
 pcl::PointCloud<PointType>::Ptr cornerPointsLessSharp(new pcl::PointCloud<PointType>());
